@@ -27,7 +27,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.0.0"
 
-  name = "education-vpc"
+  name = "ben-education-vpc"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -74,24 +74,22 @@ module "eks" {
 
   eks_managed_node_groups = {
     one = {
-      name = "node-group-1"
+      name = "node-ben-"
 
-      instance_types = ["t3.small"]
-
-      min_size     = 1
-      max_size     = 3
-      desired_size = 2
-    }
-
-    two = {
-      name = "node-group-2"
-
-      instance_types = ["t3.small"]
+      instance_types = ["t3.medium"]
 
       min_size     = 1
-      max_size     = 2
-      desired_size = 2
+      max_size     = 4
+      desired_size = 3
+      public_ip = true
+      ssh_key_name = "key-for-public-eks"
+      ssh_public_key = file("~/eks-cluster-project/key-for-public-eks.pem")
+
+
+
     }
+
+
   }
 }
 
@@ -120,5 +118,3 @@ resource "aws_eks_addon" "ebs-csi" {
   tags = {
     "eks_addon" = "ebs-csi"
     "terraform" = "true"
-  }
-}
