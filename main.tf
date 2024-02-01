@@ -25,7 +25,7 @@ resource "random_string" "suffix" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.0.0"
+  version = "5.0.0"
 
   name = "ben-education-vpc"
 
