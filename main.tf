@@ -66,9 +66,6 @@ module "eks" {
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
     public_ip = true
-    ssh_key_name = "key-for-public-eks"
-    ssh_public_key = file("~/eks-cluster-project/key-for-public-eks.pem")
-
 
   }
 
@@ -82,9 +79,6 @@ module "eks" {
       max_size     = 4
       desired_size = 3
       public_ip = true
-      ssh_key_name = "key-for-public-eks"
-      ssh_public_key = file("~/eks-cluster-project/key-for-public-eks.pem")
-
 
 
     }
