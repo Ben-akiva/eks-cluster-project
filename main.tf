@@ -53,7 +53,7 @@ module "vpc" {
 }
 
 module "eks" {
-  source = "git::https://gitlab.com/dash-infrastructure.git?ref=main"
+  source  = "terraform-aws-modules/eks/aws
   version = "19.15.3"
 
   cluster_name    = local.cluster_name
