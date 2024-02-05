@@ -21,7 +21,7 @@ jobs:
         git config --global url."https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
 
     - name: Check working directory
-      run: ls $(terraform-working-directory)
+      run: ls $(terraform_working_directory)
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
