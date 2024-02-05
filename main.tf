@@ -25,7 +25,7 @@ resource "random_string" "suffix" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "main"
+  version = "5.0.0"
 
   name = "ben-education-vpc"
 
@@ -54,7 +54,7 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "main"
+  version = "19.15.3"
 
   cluster_name    = local.cluster_name
   cluster_version = "1.28"
@@ -66,6 +66,10 @@ module "eks" {
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
     public_ip = true
+    ssh_key_name = "key-for-public-eks"
+    ssh_public_key = file("~/eks-cluster-project/key-for-public-eks.pem")
+
+
   }
 
   eks_managed_node_groups = {
@@ -78,9 +82,17 @@ module "eks" {
       max_size     = 4
       desired_size = 3
       public_ip = true
+      ssh_key_name = "key-for-public-eks"
+      ssh_public_key = file("~/eks-cluster-project/key-for-public-eks.pem")
+
+
+
     }
+
+
   }
 }
+
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
 data "aws_iam_policy" "ebs_csi_policy" {
@@ -89,7 +101,7 @@ data "aws_iam_policy" "ebs_csi_policy" {
 
 module "irsa-ebs-csi" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version = "main"
+  version = "4.7.0"
 
   create_role                   = true
   role_name                     = "AmazonEKSTFEBSCSIRole-${module.eks.cluster_name}"
@@ -108,3 +120,5 @@ resource "aws_eks_addon" "ebs-csi" {
     "terraform" = "true"
   }
 }
+~
+~
