@@ -41,14 +41,12 @@ module "vpc" {
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"             = 1
   }
-
 }
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.15.3"
   
-
   cluster_name    = local.cluster_name
   cluster_version = "1.28"
 
@@ -61,8 +59,6 @@ module "eks" {
     public_ip = true
     ssh_key_name = "key-for-public-eks"
     ssh_public_key = file("~/eks-cluster-project/key-for-public-eks.pem")
-
-
   }
 
   eks_managed_node_groups = {
@@ -77,15 +73,9 @@ module "eks" {
       public_ip = true
       ssh_key_name = "key-for-public-eks"
       ssh_public_key = file("~/eks-cluster-project/key-for-public-eks.pem")
-
-
-
     }
-
-
   }
 }
-
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
 data "aws_iam_policy" "ebs_csi_policy" {
