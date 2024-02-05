@@ -1,39 +1,24 @@
-name: Terraform Apply
+name: CI
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  terraform:
-    runs-on: self-hosted
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-    - name: Install Git
-      run: sudo apt-get update && sudo apt-get install git -y
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Configure Git credentials
-      run: |
-        git config --global url."https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
 
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
 
-    - name: Check working directory
-      run: ls $(terraform_working_directory)
-
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-west-1
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: 1.1.0
-
-    - name: Terraform Init
-      run: terraform init
+      - name: Terraform Init
+        run: terraform init
