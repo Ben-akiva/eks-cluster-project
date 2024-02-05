@@ -37,4 +37,4 @@ jobs:
 
     - name: Terraform Init
       run: |
-        terraform init || { echo 'Error: Terraform init failed' ; exit 1; }
+        /home/ubuntu/_work/_temp/799c7614-a3fa-469b-b418-a35a9202287b/terraform-bin init --ignore-preflight-errors=git || { echo 'Error: Terraform init failed' ; exit 1; }
