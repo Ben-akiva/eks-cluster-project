@@ -36,10 +36,4 @@ jobs:
         terraform_version: 1.1.0
 
     - name: Terraform Init
-      run: |
-        if [ -f /home/ubuntu/_work/_temp/799c7614-a3fa-469b-b418-a35a9202287b/terraform-bin ]; then
-          /home/ubuntu/_work/_temp/799c7614-a3fa-469b-b418-a35a9202287b/terraform-bin init --ignore-preflight-errors=git || { echo 'Error: Terraform init failed' ; exit 1; }
-        else
-          echo 'Error: Terraform binary not found'
-          exit 1
-        fi
+      run: terraform init
