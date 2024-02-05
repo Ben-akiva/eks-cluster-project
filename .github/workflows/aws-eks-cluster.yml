@@ -29,5 +29,5 @@ jobs:
         terraform_version: 1.1.0
 
     - name: Terraform Init
-      run: terraform init -upgrade
+      run: terraform init 
 
