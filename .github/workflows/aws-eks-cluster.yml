@@ -20,7 +20,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-1
 
-      
+    # Add git config command here
+    - name: Configure Git
+      run: git config --add --global url."https://oauth2:$GITHUB_TOKEN@github.com/".insteadOf "git@github.com:"
+
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -28,6 +31,3 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-
-
-  
