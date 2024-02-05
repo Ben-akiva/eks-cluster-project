@@ -10,15 +10,15 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
     - name: Install Git
       run: sudo apt-get update && sudo apt-get install git -y
 
     - name: Configure Git credentials
       run: |
         git config --global url."https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Check working directory
       run: ls $(terraform_working_directory)
