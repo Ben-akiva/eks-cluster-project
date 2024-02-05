@@ -66,7 +66,6 @@ module "eks" {
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
     public_ip = true
-
   }
 
   eks_managed_node_groups = {
@@ -79,14 +78,9 @@ module "eks" {
       max_size     = 4
       desired_size = 3
       public_ip = true
-
-
     }
-
-
   }
 }
-
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/
 data "aws_iam_policy" "ebs_csi_policy" {
