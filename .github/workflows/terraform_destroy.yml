@@ -10,5 +10,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Select Terraform workspace
+        run: terraform workspace select default
+
       - name: Destroy EKS cluster
         run: terraform destroy -auto-approve
