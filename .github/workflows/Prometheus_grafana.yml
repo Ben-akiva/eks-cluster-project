@@ -35,4 +35,4 @@ jobs:
         run: kubectl patch svc prometheus-kube-prometheus-prometheus -n prometheus --type='json' -p='[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
       - name: Edit Grafana service to LoadBalancer type
-        run:  kubectl patch svc stable-grafana -n prometheus --type='json' -p='[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
+        run:  kubectl patch svc prometheus-grafana -n prometheus --type='json' -p='[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
