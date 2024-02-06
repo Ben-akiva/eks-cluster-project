@@ -60,7 +60,8 @@ jobs:
         
       - name: Terraform Apply
         run: terraform apply -auto-approve
-- name: Update kubeconfig
+        
+      - name: Update kubeconfig
         run: aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
         
      
