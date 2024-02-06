@@ -20,7 +20,10 @@ jobs:
         run: kubectl create namespace prometheus || [ $? -eq 1 ]
 
       - name: Install Prometheus using Helm
-        run: helm install prometheus prometheus-community/kube-prometheus-stack -n prometheus
+        run: |
+          if ! helm ls -n prometheus | grep -q prometheus; then
+           helm install prometheus prometheus-community/kube-prometheus-stack -n prometheus
+          fi
 
       - name: Check Prometheus pods
         run: kubectl get pods -n prometheus
