@@ -16,7 +16,12 @@ jobs:
           sudo apt-get install -y kubectl
 
       - name: Create namespace argocd
-        run: kubectl create namespace argocd
+        run: |
+         if kubectl get namespace argocd &> /dev/null; then
+         echo "Namespace argocd already exists, skipping creation."
+         else
+         kubectl create namespace argocd
+         fi
 
       - name: Apply ArgoCD manifests
         run: kubectl patch svc argocd-server -n argocd -p '{"spec":{"type":"LoadBalancer"}}'
