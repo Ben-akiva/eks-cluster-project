@@ -52,8 +52,16 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
+        
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
         
       - name: Update kubeconfig
-        run: |
-           /bin/bash -c "aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)"        
+        run: aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+        
      
