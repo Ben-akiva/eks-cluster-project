@@ -1,0 +1,14 @@
+name: Terraform destroy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  destroy_infrastructure:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Destroy infrastructure
+        run: terraform destroy -auto-approve
