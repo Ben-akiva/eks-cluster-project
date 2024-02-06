@@ -1,10 +1,10 @@
-name: Terraform destroy
+name: CI
 
 on:
   workflow_dispatch:
 
 jobs:
-  init_and_destroy_infrastructure:
+  destroy_eks_cluster:
     runs-on: self-hosted
     steps:
       - name: Checkout
@@ -13,5 +13,8 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
-      - name: Destroy infrastructure
+      - name: Plan destruction
+        run: terraform plan -destroy
+
+      - name: Destroy EKS cluster
         run: terraform destroy -auto-approve
