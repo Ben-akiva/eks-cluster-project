@@ -59,8 +59,7 @@ jobs:
         run: terraform plan
         
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform destroy -auto-approve
 
         
-      - name: Destroy EKS cluster
-        run: terraform destroy -auto-approve
+     
