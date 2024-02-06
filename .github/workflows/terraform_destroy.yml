@@ -13,6 +13,9 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
+      - name: Select Terraform workspace
+        run: terraform workspace select ben-eks-project-5i3eUe3C
+
       - name: Plan destruction
         run: terraform plan -destroy
 
