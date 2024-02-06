@@ -19,7 +19,7 @@ jobs:
         run: kubectl create namespace argocd
 
       - name: Apply ArgoCD manifests
-        run: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+        run: kubectl patch svc argocd-server -n argocd -p '{"spec":{"type":"LoadBalancer"}}'
 
       - name: Patch ArgoCD service type
         run: kubectl patch svc argocd-server -n argocd --type='json' -p='[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
