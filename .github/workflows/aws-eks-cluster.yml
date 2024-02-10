@@ -52,11 +52,6 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: Create Directory
-        run: mkdir aws-eks-cluster
-
-      - name: Enter Directory
-        run: cd aws-eks-cluster
 
       - name: Terraform Init
         run: terraform init
@@ -67,11 +62,7 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
         
-      - name: Wait for Terraform outputs
-        run: sleep 30 
-
-      - name: Configure kubeconfig
-        run: aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
-
+     
+     
         
      
