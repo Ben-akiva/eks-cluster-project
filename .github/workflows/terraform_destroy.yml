@@ -13,4 +13,8 @@ jobs:
       - name: Enter Directory
         run: cd "/home/ubuntu/actions-runner/_work/eks-cluster-project/eks-cluster-project"
 
+      - name: Destroy EKS cluster
+        run: terraform destroy -auto-approve
+
+
   
