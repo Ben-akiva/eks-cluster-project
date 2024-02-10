@@ -32,5 +32,8 @@ jobs:
       - name: Patch ArgoCD service type
         run: kubectl patch svc argocd-server -n argocd --type='json' -p='[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
+      - name: Wait for outputs
+        run: sleep 30
+
       - name: Retrieve ArgoCD admin password
         run: kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
