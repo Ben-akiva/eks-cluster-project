@@ -37,6 +37,9 @@ jobs:
       - name: Edit Grafana service to LoadBalancer type
         run:  kubectl patch svc prometheus-grafana -n prometheus --type='json' -p='[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
+      - name: Wait for outputs
+        run: sleep 30
+        
       - name: Get Grafana admin password
         run: |
          kubectl get secret --namespace prometheus prometheus-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
