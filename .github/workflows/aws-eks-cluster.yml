@@ -66,7 +66,9 @@ jobs:
         run: cd ~/actions-runner/_work/eks-cluster-project/eks-cluster-project
         
       - name: Update kubeconfig
-        run: aws eks --region $(terraform output -raw region) update-kubeconfig \  --name $(terraform output -raw cluster_name)
+        run: aws eks --region $(terraform output -raw region) update-kubeconfig \
+             --name $(terraform output -raw cluster_name)
+
             
         
 
