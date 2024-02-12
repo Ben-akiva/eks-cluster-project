@@ -13,6 +13,10 @@ jobs:
       - name: Enter Directory
         run: cd ~/actions-runner/_work/eks-cluster-project/eks-cluster-project
 
+      - name: Destroy 
+        run: terraform plan
+
+
       - name: Destroy EKS cluster
         run: terraform destroy -auto-approve
 
