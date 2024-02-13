@@ -14,16 +14,6 @@ jobs:
         run: cd ~/actions-runner/_work/eks-cluster-project/eks-cluster-project
 
       - name: Destroy 
-        run: terraform init 
-             
-            
-      - name: Destroy 
-        run: terraform plan
-
-      - name: Destroy 
-        run: terraform apply -auto-approve
-
-      - name: Destroy 
         run: terraform destroy -auto-approve
 
 
